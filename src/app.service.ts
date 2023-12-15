@@ -208,7 +208,7 @@ async deleteComentary(idComentary: number, correo: string): Promise<boolean> {
             return null;
         }
     }
-    async showSoloTaskProject(idProyecto: number, correo: string): Promise<{ taskName: string; taskId: number }[] | null> {
+    async showSoloTaskProject(idProyecto: number, correo: string): Promise<{ taskName: string;taskId: number;estado:boolean }[] | null> {
         try {
             const comentarios = await this.taskComentaryRepository.find({
                 where: { idProyecto: idProyecto },
@@ -219,7 +219,7 @@ async deleteComentary(idComentary: number, correo: string): Promise<boolean> {
                 return null;
             }
     
-            const projectDetails: { taskName: string; taskId: number }[] = [];
+            const projectDetails: { taskName: string; taskId: number;estado:boolean }[] = [];
     
             for (const comentario of comentarios) {
                 const tarea = comentario.task;
@@ -231,9 +231,11 @@ async deleteComentary(idComentary: number, correo: string): Promise<boolean> {
                 const existingTask = projectDetails.find(task => task.taskId === tarea.id);
     
                 if (!existingTask) {
-                    const taskDetails: { taskName: string; taskId: number } = {
+                    const taskDetails: { taskName: string; taskId: number;estado:boolean } = {
                         taskName: tarea.name,
                         taskId: tarea.id,
+                        estado: tarea.estado
+                        
                     };
     
                     projectDetails.push(taskDetails);
