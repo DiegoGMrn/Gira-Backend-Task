@@ -114,7 +114,29 @@ export class AppController {
       return null;
     }
   }
+  @EventPattern('update_task_state')
+  async handleTaskUpdateState(data: { idTarea:number,correo:string }) {
+  const { idTarea , correo  } = data;
+  
+  if (data) {
+    const resp = await this.appService.updateTaskState(data.idTarea,data.correo)
+    return resp;
+  } else {
+    console.error('Falta INFO.');
+  }
+  }
 
+  @EventPattern('update_task_name')
+  async handleTaskUpdateName(data: { idTarea:number,nuevoNombre:string,correo:string }) {
+  const { idTarea ,nuevoNombre, correo  } = data;
+  
+  if (data) {
+    const resp = await this.appService.updateTaskName(data.idTarea,data.nuevoNombre,data.correo)
+    return resp;
+  } else {
+    console.error('Falta INFO.');
+  }
+  }
 
 
 }

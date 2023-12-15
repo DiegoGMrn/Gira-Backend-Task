@@ -247,4 +247,21 @@ async deleteComentary(idComentary: number, correo: string): Promise<boolean> {
         }
     }
     
+    async updateTaskState(idTarea: number,correo: string): Promise<boolean> {
+        const tareaBuscada = await this.taskRepository.findOne({ where: { id:idTarea } });
+        if(tareaBuscada){
+            tareaBuscada.estado=true;
+            return true
+        }
+        return false
+    }
+
+    async updateTaskName(idTarea: number,nuevoNombre:string,correo: string): Promise<boolean> {
+        const tareaBuscada = await this.taskRepository.findOne({ where: { id:idTarea } });
+        if(tareaBuscada){
+            tareaBuscada.name=nuevoNombre;
+            return true
+        }
+        return false
+    }
   }
