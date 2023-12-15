@@ -18,7 +18,7 @@ export class Task {
     @Column()
     descripcion?: string;
 
-    @Column()
+    @Column({ nullable: true })
     estado?: boolean;
     
     @OneToMany(() => TaskComentary, taskComentary => taskComentary.task, { cascade: true, onDelete: 'CASCADE' })
